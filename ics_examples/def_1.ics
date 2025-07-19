@@ -1,0 +1,126 @@
+# ICS Definition: def_1
+# Full ID: oval:mil.disa.stig.adobe.reader:def:1
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 17
+# - Variables: 2 (Complex with RUN blocks: 2)
+# - Objects: 11 (SET operations: 4)
+# - States: 1
+# - Tests: 3
+# 
+# Features:
+# - Has variables: True
+# - Has SET operations: True
+# - Has RUN blocks: True
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_1
+DEF
+    # Variables and runtime operations
+    VAR var_100 string
+    RUN var_100 CONCAT
+        literal "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\"
+        SET_REF obj_100
+    RUN_END
+
+    VAR var_101 string
+    RUN var_101 CONCAT
+        literal "SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\"
+        SET_REF obj_100
+    RUN_END
+
+    # SET operations
+    SET obj_103 union
+        OBJECT
+        hive string HKEY_LOCAL_MACHINE
+        key string VAR var_100
+        name string DisplayVersion
+        OBJECT_END
+        OBJECT
+        hive string HKEY_LOCAL_MACHINE
+        key string VAR var_101
+        name string DisplayVersion
+        OBJECT_END
+    SET_END
+    SET obj_106 union
+        OBJECT
+        hive HKEY_LOCAL_MACHINE
+        key "SOFTWARE\Adobe\Acrobat Reader\DC\Installer"
+        name ENU_GUID
+        OBJECT_END
+        OBJECT
+        hive HKEY_LOCAL_MACHINE
+        key "SOFTWARE\WOW6432Node\Adobe\Acrobat Reader\DC\Installer"
+        name ENU_GUID
+        OBJECT_END
+    SET_END
+    SET obj_100 union
+        SET obj_106 union
+            OBJECT
+            hive HKEY_LOCAL_MACHINE
+            key "SOFTWARE\Adobe\Acrobat Reader\DC\Installer"
+            name ENU_GUID
+            OBJECT_END
+            OBJECT
+            hive HKEY_LOCAL_MACHINE
+            key "SOFTWARE\WOW6432Node\Adobe\Acrobat Reader\DC\Installer"
+            name ENU_GUID
+            OBJECT_END
+        SET_END
+        SET obj_107 union
+            OBJECT
+            hive HKEY_LOCAL_MACHINE
+            key "SOFTWARE\Adobe\Adobe Acrobat\DC\Installer"
+            name ENU_GUID
+            OBJECT_END
+            OBJECT
+            hive HKEY_LOCAL_MACHINE
+            key "SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Installer"
+            name ENU_GUID
+            OBJECT_END
+        SET_END
+    SET_END
+    SET obj_107 union
+        OBJECT
+        hive HKEY_LOCAL_MACHINE
+        key "SOFTWARE\Adobe\Adobe Acrobat\DC\Installer"
+        name ENU_GUID
+        OBJECT_END
+        OBJECT
+        hive HKEY_LOCAL_MACHINE
+        key "SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Installer"
+        name ENU_GUID
+        OBJECT_END
+    SET_END
+
+    # Compliance criteria
+    CRI OR
+        CTN file
+            TEST all at_least_one_exists
+            OBJECT
+            filepath "C:\ProgramData\regid.1986-12.com.adobe\regid.1986-12.com.adobe_V7{}AcrobatCont-12-Win-GM.swidtag"
+            pattern "pattern match" "<swid\:unique_id>V7\{\}AcrobatCont\-12\-Win\-GM<\/swid\:unique_id>"
+            instance int "greater than or equal" 1
+            OBJECT_END
+        CTN_END
+        CRI AND
+            CTN registry
+                TEST at least one at_least_one_exists
+                OBJECT
+                    SET_REF obj_103
+                OBJECT_END
+                STATE
+                    value "pattern match" "^\d+\.\d+\.20"
+                STATE_END
+            CTN_END
+            CTN registry
+                TEST at least one at_least_one_exists
+                OBJECT
+                    SET_REF obj_100
+                OBJECT_END
+            CTN_END
+        CRI_END
+    CRI_END
+DEF_END

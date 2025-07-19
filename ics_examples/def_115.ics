@@ -1,0 +1,40 @@
+# ICS Definition: def_115
+# Full ID: oval:mil.disa.stig.ubuntu1804:def:115
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 4
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 2 (SET operations: 0)
+# - States: 0
+# - Tests: 2
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_115
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/pam.d/login
+            pattern "pattern match" "^\s*session\s+required\s+pam_lastlog\.so\s+(?:\w+\s+)*showfailed\b\s*(?:\w+\b\s*)*\s*(?:#.*)?$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+        CTN_END
+        CTN file true
+            TEST all
+            OBJECT
+            filepath string /etc/pam.d/login
+            pattern "pattern match" "^\s*session\s+required\s+pam_lastlog\.so\s+(?:\w+\s+)*silent\b\s*(?:\w+\b\s*)*\s*(?:#.*)?$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+        CTN_END
+    CRI_END
+DEF_END

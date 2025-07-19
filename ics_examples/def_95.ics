@@ -1,0 +1,31 @@
+# ICS Definition: def_95
+# Full ID: oval:mil.disa.stig.ubuntu1804:def:95
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 2
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 1 (SET operations: 0)
+# - States: 0
+# - Tests: 1
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_95
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN process
+            TEST all at_least_one_exists
+            OBJECT
+            command_line string "pattern match" "^\/sbin\/auditd\b"
+            pid int "greater than" 1
+            OBJECT_END
+        CTN_END
+    CRI_END
+DEF_END

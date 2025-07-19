@@ -1,0 +1,35 @@
+# ICS Definition: def_104
+# Full ID: oval:mil.disa.stig.ubuntu1804:def:104
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 3
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 1 (SET operations: 0)
+# - States: 1
+# - Tests: 1
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_104
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN file
+            TEST all all_exist
+            OBJECT
+            filepath string /proc/sys/crypto/fips_enabled
+            pattern "pattern match" "^(\d+)$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+            STATE
+                subexpression int equals 1
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

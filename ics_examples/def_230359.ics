@@ -1,0 +1,49 @@
+# ICS Definition: def_230359
+# Full ID: oval:mil.disa.stig.defs:def:230359
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 5
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 3 (SET operations: 1)
+# - States: 1
+# - Tests: 1
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: True
+# - Has RUN blocks: False
+# - Has BEHAVIORS: True
+# - Has FILTERS: False
+
+# Definition: def_230359
+DEF
+    # SET operations
+    SET obj_23035900 union
+        OBJECT
+        filepath /etc/security/pwquality.conf
+        pattern "pattern match" "^\s*dcredit\s*=\s*(-?\d*)\s*(?:#.*)?$"
+        instance int "greater than or equal" 1
+        OBJECT_END
+        OBJECT
+        # BEHAVIORS - needs complex resolution
+        path /etc/security/pwquality.conf.d
+        filename "pattern match" "\.conf$"
+        pattern "pattern match" "^\s*dcredit\s*=\s*(-?\d*)\s*(?:#.*)?$"
+        instance int "greater than or equal" 1
+        OBJECT_END
+    SET_END
+
+    # Compliance criteria
+    CRI AND
+        CTN file
+            TEST all
+            OBJECT
+                SET_REF obj_23035900
+            OBJECT_END
+            STATE
+                subexpression int "less than" 0
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

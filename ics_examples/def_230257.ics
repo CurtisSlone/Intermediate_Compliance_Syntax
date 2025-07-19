@@ -1,0 +1,45 @@
+# ICS Definition: def_230257
+# Full ID: oval:mil.disa.stig.defs:def:230257
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 5
+# - Variables: 1 (Complex with RUN blocks: 0)
+# - Objects: 2 (SET operations: 1)
+# - States: 1
+# - Tests: 1
+# 
+# Features:
+# - Has variables: True
+# - Has SET operations: True
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_230257
+DEF
+    # Variables and runtime operations
+    VAR 20000003 string ['/bin','/sbin','/usr/bin','/usr/sbin','/usr/local/bin','/usr/local/sbin']
+
+    # SET operations
+    SET obj_20000009 union
+        OBJECT
+        path string string VAR var_20000003 VAR_CHECK "at least one"
+        filename string string "pattern match" .*
+        OBJECT_END
+    SET_END
+
+    # Compliance criteria
+    CRI AND
+        CTN file
+            TEST all all_exist
+            OBJECT
+                SET_REF obj_20000009
+            OBJECT_END
+            STATE
+                gwrite boolean false
+                owrite boolean false
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

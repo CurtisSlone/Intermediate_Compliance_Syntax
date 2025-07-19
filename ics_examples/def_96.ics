@@ -1,0 +1,30 @@
+# ICS Definition: def_96
+# Full ID: oval:mil.disa.stig.ubuntu1804:def:96
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 2
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 1 (SET operations: 0)
+# - States: 0
+# - Tests: 1
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_96
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN package
+            TEST all all_exist
+            OBJECT
+            name libpam-pwquality
+            OBJECT_END
+        CTN_END
+    CRI_END
+DEF_END

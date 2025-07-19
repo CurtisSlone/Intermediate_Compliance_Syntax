@@ -1,0 +1,35 @@
+# ICS Definition: def_114
+# Full ID: oval:mil.disa.stig.ubuntu1804:def:114
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 3
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 1 (SET operations: 0)
+# - States: 1
+# - Tests: 1
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_114
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN file
+            TEST all all_exist
+            OBJECT
+            filepath string /etc/pam.d/common-auth
+            pattern "pattern match" "^\s*auth\s+required\s+pam_faildelay\.so\s+delay=(\d+)\s*(?:#.*)?$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+            STATE
+                subexpression int "greater than or equal" 4000000
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

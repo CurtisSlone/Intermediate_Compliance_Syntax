@@ -1,0 +1,50 @@
+ICS Definition Build Summary
+==================================================
+Generated: 2025-07-19 07:04:09
+
+Overall Statistics:
+  Total definitions: 5419
+  Successful builds: 50
+  Failed builds: 0
+  Success rate: 0.9%
+
+Feature Statistics:
+  Definitions with variables: 4
+  Definitions with SET operations: 9
+  Definitions with RUN blocks: 3
+
+Complexity Distribution:
+  Simple (0-5 deps): 44
+  Moderate (6-15 deps): 4
+  Complex (16-50 deps): 2
+  Very Complex (50+ deps): 0
+
+Top 10 Most Complex Definitions:
+  1. def_1: 17 deps (2 vars, 4 sets)
+  2. def_116: 17 deps (0 vars, 0 sets)
+  3. def_22: 9 deps (0 vars, 0 sets)
+  4. def_230346: 9 deps (0 vars, 2 sets)
+  5. def_100: 8 deps (2 vars, 0 sets)
+  6. def_101: 8 deps (2 vars, 0 sets)
+  7. def_230257: 5 deps (1 vars, 1 sets)
+  8. def_230357: 5 deps (0 vars, 1 sets)
+  9. def_230358: 5 deps (0 vars, 1 sets)
+  10. def_230359: 5 deps (0 vars, 1 sets)
+
+Definitions with Variables:
+  def_1: 2 vars (2 complex)
+  def_230257: 1 vars (0 complex)
+  def_100: 2 vars (2 complex)
+  def_101: 2 vars (2 complex)
+
+Definitions with SET Operations:
+  def_1: 4 sets, 17 total deps
+  def_230257: 1 sets, 5 total deps
+  def_230346: 2 sets, 9 total deps
+  def_230357: 1 sets, 5 total deps
+  def_230358: 1 sets, 5 total deps
+  def_230359: 1 sets, 5 total deps
+  def_230363: 1 sets, 5 total deps
+  def_230369: 1 sets, 5 total deps
+  def_230375: 1 sets, 5 total deps
+

@@ -1,0 +1,68 @@
+# ICS Definition: def_22
+# Full ID: oval:mil.disa.stig.adobe.reader:def:22
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 9
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 4 (SET operations: 0)
+# - States: 1
+# - Tests: 4
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_22
+DEF
+    # Compliance criteria
+    CRI OR
+        CRI AND
+            CTN registry
+                TEST all at_least_one_exists
+                OBJECT
+                hive HKEY_LOCAL_MACHINE
+                key "SOFTWARE\Adobe\Acrobat Reader\DC\Installer"
+                name ENU_GUID
+                OBJECT_END
+            CTN_END
+            CTN registry
+                TEST all at_least_one_exists
+                OBJECT
+                hive string HKEY_LOCAL_MACHINE
+                key string "Software\Adobe\Acrobat Reader\DC\Installer"
+                name string DisableMaintenance
+                OBJECT_END
+                STATE
+                    type reg_dword
+                    value int 1
+                STATE_END
+            CTN_END
+        CRI_END
+        CRI AND
+            CTN registry
+                TEST all at_least_one_exists
+                OBJECT
+                hive HKEY_LOCAL_MACHINE
+                key "SOFTWARE\WOW6432Node\Adobe\Acrobat Reader\DC\Installer"
+                name ENU_GUID
+                OBJECT_END
+            CTN_END
+            CTN registry
+                TEST all at_least_one_exists
+                OBJECT
+                hive string HKEY_LOCAL_MACHINE
+                key string "SOFTWARE\Wow6432Node\Adobe\Acrobat Reader\DC\Installer"
+                name string DisableMaintenance
+                OBJECT_END
+                STATE
+                    type reg_dword
+                    value int 1
+                STATE_END
+            CTN_END
+        CRI_END
+    CRI_END
+DEF_END

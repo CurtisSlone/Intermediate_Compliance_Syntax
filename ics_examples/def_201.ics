@@ -1,0 +1,37 @@
+# ICS Definition: def_201
+# Full ID: oval:navy.navwar.niwcatlantic.scc.adobe.reader:def:201
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 3
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 1 (SET operations: 0)
+# - States: 1
+# - Tests: 1
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: True
+
+# Definition: def_201
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN unknown
+            TEST all at_least_one_exists
+            OBJECT
+            key string "Software\Adobe\Acrobat Reader\DC\Security\cDigSig\cAdobeDownload"
+            name string bLoadSettingsFromURL
+            FILTER exclude "Exclude Disabled Accounts"
+                enabled boolean false
+            FILTER_END
+            OBJECT_END
+            STATE
+                value 0
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

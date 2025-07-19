@@ -1,0 +1,54 @@
+# ICS Definition: def_101
+# Full ID: oval:mil.disa.stig.ubuntu1804:def:101
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 8
+# - Variables: 2 (Complex with RUN blocks: 2)
+# - Objects: 3 (SET operations: 0)
+# - States: 1
+# - Tests: 2
+# 
+# Features:
+# - Has variables: True
+# - Has SET operations: False
+# - Has RUN blocks: True
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_101
+DEF
+    # Variables and runtime operations
+    VAR var_10101 string
+    RUN var_10101 SPLIT " "
+            subexpression string SET_REF obj_10102
+    RUN_END
+
+    VAR var_10100 string
+    RUN var_10100 CONCAT
+        literal "^\s*(password\S*)\s+"
+        VAR var_10101
+        literal "\s+"
+    RUN_END
+
+    # Compliance criteria
+    CRI OR
+        CTN file true
+            TEST all all_exist
+            OBJECT
+            filepath string /boot/efi/EFI/ubuntu/grub.cfg
+            OBJECT_END
+        CTN_END
+        CTN file
+            TEST all all_exist
+            OBJECT
+            filepath string /boot/efi/EFI/ubuntu/grub.cfg
+            pattern "pattern match" VAR var_10100
+            instance int "greater than or equal" 1
+            OBJECT_END
+            STATE
+                subexpression string equals password_pbkdf2
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

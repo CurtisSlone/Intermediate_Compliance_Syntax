@@ -1,0 +1,89 @@
+# ICS Definition: def_116
+# Full ID: oval:mil.disa.stig.ubuntu1804:def:116
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 17
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 7 (SET operations: 0)
+# - States: 3
+# - Tests: 7
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_116
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/pam.d/common-auth
+            pattern "pattern match" "^\s*auth\s+\[default=die\]\s+pam_faillock\.so\s+authfail\s*$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+        CTN_END
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/pam.d/common-auth
+            pattern "pattern match" "^\s*auth\s+sufficient\s+pam_faillock\.so\s+authsucc\s*$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+        CTN_END
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/security/faillock.conf
+            pattern "pattern match" "^\s*audit\s*$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+        CTN_END
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/security/faillock.conf
+            pattern "pattern match" "^\s*silent\s*$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+        CTN_END
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/security/faillock.conf
+            pattern "pattern match" "^\s*deny\s*=\s*([0-9])+\s*$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+            STATE
+                subexpression int "less than or equal" 3
+            STATE_END
+        CTN_END
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/security/faillock.conf
+            pattern "pattern match" "^\s*fail_interval\s*=\s*([0-9]+)+\s*$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+            STATE
+                subexpression int "less than or equal" 900
+            STATE_END
+        CTN_END
+        CTN file
+            TEST all
+            OBJECT
+            filepath string /etc/security/faillock.conf
+            pattern "pattern match" "^\s*unlock_time\s*=\s*([0-9])+\s*$"
+            instance int "greater than or equal" 1
+            OBJECT_END
+            STATE
+                subexpression int equals 0
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

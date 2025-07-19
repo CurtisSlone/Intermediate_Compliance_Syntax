@@ -1,0 +1,36 @@
+# ICS Definition: def_10
+# Full ID: oval:mil.disa.stig.adobe.reader:def:10
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 3
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 1 (SET operations: 0)
+# - States: 1
+# - Tests: 1
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: False
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_10
+DEF
+    # Compliance criteria
+    CRI AND
+        CTN registry
+            TEST all at_least_one_exists
+            OBJECT
+            hive string HKEY_LOCAL_MACHINE
+            key string "Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown"
+            name string bEnhancedSecurityStandalone
+            OBJECT_END
+            STATE
+                type reg_dword
+                value int 1
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END

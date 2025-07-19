@@ -1,0 +1,70 @@
+# ICS Definition: def_230346
+# Full ID: oval:mil.disa.stig.defs:def:230346
+# Generated: 2025-07-19 07:04:09
+# 
+# Dependency Analysis:
+# - Total dependencies: 9
+# - Variables: 0 (Complex with RUN blocks: 0)
+# - Objects: 6 (SET operations: 2)
+# - States: 1
+# - Tests: 2
+# 
+# Features:
+# - Has variables: False
+# - Has SET operations: True
+# - Has RUN blocks: False
+# - Has BEHAVIORS: False
+# - Has FILTERS: False
+
+# Definition: def_230346
+DEF
+    # SET operations
+    SET obj_23034603 union
+        OBJECT
+        filepath /etc/security/limits.conf
+        pattern "pattern match" "^\s*[^#*\s]+\s+(?:(?:hard)|(?:-))\s+maxlogins\s+(\d+)\s*$"
+        instance int "greater than or equal" 1
+        OBJECT_END
+        OBJECT
+        path /etc/security/limits.d
+        filename "pattern match" ".*\.conf$"
+        pattern "pattern match" "^\s*[^#*\s]+\s+(?:(?:hard)|(?:-))\s+maxlogins\s+(\d+)\s*$"
+        instance int "greater than or equal" 1
+        OBJECT_END
+    SET_END
+    SET obj_23034600 union
+        OBJECT
+        filepath /etc/security/limits.conf
+        pattern "pattern match" "^\s*\*\s+(?:(?:hard)|(?:-))\s+maxlogins\s+(\d+)\s*$"
+        instance int "greater than or equal" 1
+        OBJECT_END
+        OBJECT
+        path /etc/security/limits.d
+        filename "pattern match" ".*\.conf$"
+        pattern "pattern match" "^\s*\*\s+(?:(?:hard)|(?:-))\s+maxlogins\s+(\d+)\s*$"
+        instance int "greater than or equal" 1
+        OBJECT_END
+    SET_END
+
+    # Compliance criteria
+    CRI AND
+        CTN file
+            TEST all at_least_one_exists
+            OBJECT
+                SET_REF obj_23034600
+            OBJECT_END
+            STATE
+                subexpression int "less than or equal" 10
+            STATE_END
+        CTN_END
+        CTN file
+            TEST all any_exist
+            OBJECT
+                SET_REF obj_23034603
+            OBJECT_END
+            STATE
+                subexpression int "less than or equal" 10
+            STATE_END
+        CTN_END
+    CRI_END
+DEF_END
