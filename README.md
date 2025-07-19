@@ -1,5 +1,3 @@
-Here is a rewritten version of the `README.md` focused purely on the Intermediate Compliance Syntax (ICS), its architecture, syntax, semantics, and usage—excluding all mentions of AI, training data, or registries:
-
 ---
 
 # Intermediate Compliance Syntax (ICS)
